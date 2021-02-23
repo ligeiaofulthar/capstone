@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Async Weather App</title>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
+      <link href="./css/styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <main>
+      <h1>moodtracker</h1>
+      <form class="">
+        <div class="md-top">
+          <label class="" for="name">Enter name</label>
+          <input class="" type="text" name="name" id="name">
+        </div>
+        <div class="md-left">
+          <label class="" for="city">Enter city</label>
+          <input class="" type="text" name="city" id="city">
+          <p class="tipp">e.g. Vienna, Berlin, Washington</p>
+        </div>
+
+        <div class="md-right">
+          <label class="" for="country">Country</label>
+          <input class="" type="text" name="country" id="country"></textarea>
+          <p class="tipp">e.g. for Austria: AT, America: US</p>
+        </div>
+
+        <div class="md-main">
+          <label class="" for="feelings">Feelings</label>
+          <textarea class="" placeholder="How do you feel today?" type="text" name="feelings" id="feelings"></textarea>
+        </div>
+
+        <div class="md-button">
+          <button class="btn btn--primary" id="generate">Generate</button>
+        </div>
+
+        <div class="content-wrapper md-comment">
+          <h2>your entries:</h2>
+          <div id="name-content">
+          </div>
+          <div id="date">
+          </div>
+          <div id="temp">
+          </div>
+          <div id="content">
+          </div>
+        </div>
+    </form>
+  </main>
+  <script src="./app.js"></script>
+  </body>
+</html>
