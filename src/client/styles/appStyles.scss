@@ -1,0 +1,24 @@
+@import 'resets';
+@import 'themeColors';
+@import 'base';
+@import 'footer';
+@import 'form';
+@import 'header';
+
+$theme-font: 'Roboto Mono', monospace, sans-serif;
+
+body {
+  font-family: $theme-font;
+  background-color: $color-primary;
+  h1, h2 {
+      color: $color-black;
+      font-size: 2rem;
+      line-height: 1.4;
+      padding-bottom: 2rem;
+  }
+}
+
+input {
+  background-color: #d9dbf0;
+
+}

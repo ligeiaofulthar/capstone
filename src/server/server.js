@@ -17,7 +17,7 @@ app.use(cors());
 const path = require('path');
 
 /* Initializing the main project folder */
-app.use(express.static(path.join('website')));
+app.use(express.static('dist'));
 
 // Spin up the server
 const port = 3000;

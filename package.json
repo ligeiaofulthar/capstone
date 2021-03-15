@@ -1,0 +1,46 @@
+{
+  "name": "capstone",
+  "version": "1.0.0",
+  "description": "capstone project for udacity",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^5.1.3",
+    "html-webpack-plugin": "^4.0.0",
+    "jest": "^26.6.3",
+    "mini-css-extract-plugin": "^1.3.9",
+    "node-sass": "^5.0.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
+    "sass-loader": "^10.1.1",
+    "style-loader": "^2.0.0",
+    "terser-webpack-plugin": "^4.2.3",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "scripts": {
+    "test": "test",
+    "start": "node src/server/server.js",
+    "prod": "webpack --config webpack.prod.js",
+    "dev": "webpack-dev-server  --config webpack.dev.js --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ligeiaofulthar/capstone.git"
+  },
+  "author": "Yulia Halper",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ligeiaofulthar/capstone/issues"
+  },
+  "homepage": "https://github.com/ligeiaofulthar/capstone#readme"
+}

@@ -1,0 +1,11 @@
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+    height: 60px;
+
+    ul li {
+        list-style-type: none;
+        display: inline-block;
+    }
+}

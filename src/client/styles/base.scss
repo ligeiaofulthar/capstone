@@ -1,0 +1,72 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 2;
+}
+
+section {
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+body {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 100px auto 60px;
+    gap: 0px 30px;
+    grid-template-areas:
+    "header header header header header header header header header header header header"
+    "main main main main main main main main main main main main"
+    "ft ft ft ft ft ft ft ft ft ft ft ft";
+    
+}
+
+header {
+    grid-area: header;
+}
+
+main {
+    grid-area: main;
+    border-bottom: solid 4px #918beb;
+    border-top: solid 4px #918beb;
+}
+
+footer {
+    grid-area: ft;
+}
+
+.footer--link {
+    &:hover {
+        color: #918beb ;
+        border-bottom: solid 2px #918beb;
+    }
+}
+
+
+a {
+    text-decoration: none;
+	transition-duration: 0.4s;
+}
+
+a:link {
+	color: #000;
+	border-bottom: solid 2px #b36f47;
+}
+
+a:hover {
+
+}
+
+a:visited {
+	color: #000;
+	border-bottom: solid 2px #918beb;
+}
+
+a:active {
+	color: #3b7764;
+	border-bottom: solid 2px #000;
+}
