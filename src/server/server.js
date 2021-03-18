@@ -1,50 +1,67 @@
 // express to run server and routes
-const express = require('express')
+const express = require('express');
 
 // start-up instance of app
 const app = express();
 
 /* include dependencies */
 //bodyParser as middleware
-const bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({ extended: false}));
-app.use(bodyParser.json());
-
-//cors
-const cors = require('cors')
-app.use(cors());
-
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const path = require('path');
+const fetch = require('node-fetch');
+const dotenv = require('dotenv');
+dotenv.config();
+//cors
+app.use(cors());
+// to use json
+app.use(bodyParser.json());
+// to use url encoded values
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 /* Initializing the main project folder */
 app.use(express.static('dist'));
 
 // Spin up the server
-const port = 3000;
-const server = app.listen(port, listening);
-
-function listening() {
-    console.log("server running");
+const port = process.env.PORT | 5000;
+app.listen(port, function() {
     console.log(`running on localhost: ${port}`);
+})
+
+app.get('/', function (req, res) {
+    res.sendFile('dist/index.html')
+})
+
+//geonames api call
+const fetchCoordinates = async (city, country) => {
+    const url = "http://api.geonames.org/searchJSON?formatted=true";
+    const geonamesApi = process.env.GEONAMES_USERNAME;
+    const geonamesResponse = await fetch(`${url}&name=${city}&countryCode=${country}&username=${geonamesApi}`);
+    try {
+        const geonamesData = await geonamesResponse.json();
+
+        const projectData = {
+            lat: geonamesData.geonames[0].lat,
+            lng: geonamesData.geonames[0].lng,
+        }
+        return projectData;
+
+    } catch (error) {
+        console.log('error from index.js: fetchCoordinates', error);
+    }
 }
 
-// app endpoint
-let projectData = {};
+// https://api.weatherbit.io/v2.0/current?lat=35.7796&lon=-78.6382&key=API_KEY&include=minutely
 
-/* get route */
-app.get('/get', sendData);
 
-function sendData(req, res) {
-    res.send(projectData);
-}
+// post route
+app.post('/geonames', function (req, res) {
+    const city = req.body.newCity;
+    const country = req.body.newCountry;
+    const date = req.body.travelDate;
 
-/* post route */
-app.post('/addData', addData);
-
-function addData(req,res){
-    projectData['userName'] = req.body.userName;
-    projectData['date'] = req.body.date;
-    projectData['temperature'] = req.body.temperature;
-    projectData['userFeel'] = req.body.userFeel;
-    res.send(projectData);
-}
+    fetchCoordinates(city, country);
+    fetchWeather(lat, lng, date);
+})
