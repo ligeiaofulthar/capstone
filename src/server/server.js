@@ -81,6 +81,30 @@ const fetchWeather = async (lat, lng, date) => {
     }
 }
 
+// https://pixabay.com/api/?key=20750786-14149fcb1191f54f15308757e&q=yellow+flowers&image_type=photo
+// pixabay api call
+const fetchImage = async (city) => {
+    const url = "https://pixabay.com/api/";
+    city_encoded= encodeURIComponent(city);
+    console.log(city_encoded);
+    const pixabayApi = process.env.PIXABAY_KEY;
+    const pixabayResponse = await fetch(`${url}?key=${pixabayApi}&q=${city_encoded}&image_type=photo`);
+    console.log(pixabayResponse);
+    try {
+        const pixabayData = await pixabayResponse.json();
+        // console.log('pixa', pixabayData);
+
+        const pixaData = {
+            image_url: pixabayData.hits[0].largeImageURL
+        }
+        // console.log('final', pixaData);
+        return pixaData;
+
+    } catch (error) {
+        console.log('error from index.js: fetchImage', error);
+    }
+}
+
 // post route
 app.post('/geonames', async (req, res) => {
     try {
@@ -90,7 +114,7 @@ app.post('/geonames', async (req, res) => {
 
     let coordinates = await fetchCoordinates(city, country);
     let weather = await fetchWeather(coordinates.lat, coordinates.lng, date);
-    // let image = await fetchImage(city);
+    let image = await fetchImage(city);
 
     console.log('post', image);
     // const trip = {
