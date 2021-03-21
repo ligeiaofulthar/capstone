@@ -29,7 +29,7 @@ const fetchData = async(newCity = '', newCountry = '') => {
         return apiAnswer;
 
     } catch(error) {
-        console.log('error', error);
+        console.log('error from fetchData in app.js', error);
     }
 }
 
