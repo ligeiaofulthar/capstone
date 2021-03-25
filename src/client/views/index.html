@@ -1,50 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Capstone Travel App</title>
-      <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
-      <!-- <link href="./css/styles.css" rel="stylesheet"> -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capstone Travel App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <!-- <link href="./css/styles.css" rel="stylesheet"> -->
   </head>
   <body>
     <main>
-      <h1>moodtracker</h1>
+      <h1>Travelplanner</h1>
       <form class="">
-        <div class="md-left">
-          <label class="" for="city">Enter city</label>
-          <input class="" type="text" name="city" id="city">
-          <p class="tipp">e.g. Vienna, Berlin, Washington</p>
+        <label class="full-width" for="city">To</label>
+
+        <div>
+          <input class="" placeholder="City" type="text" name="city" id="city">
+          <!-- <p class="tipp">e.g. Vienna, Berlin, Washington</p> -->
         </div>
 
-        <div class="md-right">
-          <label class="" for="country">Country</label>
-          <input class="" type="text" name="country" id="country"></textarea>
-          <p class="tipp">e.g. for Austria: AT, America: US</p>
+        <div>
+          <!-- <label class="" for="country">he</label> -->
+          <input class="" placeholder="Country" type="text" name="country" id="country">
+          <!-- <p class="tipp">e.g. for Austria: AT, America: US</p> -->
         </div>
 
-        <div class="md-main">
-          <label class="" for="travel-date">Travel Date</label>
-          <textarea class="" placeholder="dd/mm/yyyy" type="text" name="travel-date" id="travel-date"></textarea>
+        <div class="full-width">
+          <label class="" for="travel-date">departure</label>
+          <input class="" placeholder="dd/mm/yyyy" type="date" name="travel-date" id="travel-date">
         </div>
 
-        <div class="md-button">
-          <button class="btn btn--primary" id="submit-form">Generate</button>
-        </div>
+        <div class=""></div>
+        <button class="btn btn--primary" id="submit-form">Send</button>
+      </form>
 
-        <div class="content-wrapper md-comment">
-          <h2>your entries:</h2>
-          <div id="date">
-          </div>
-          <div id="temp">
-          </div>
-          <div id="content">
+      <div class="response-wrapper md-comment">
+        <div class="one-third">
+          <div id="location-img">
           </div>
         </div>
-    </form>
+
+        <div class="two-thirds">
+          <h2>Your trip:</h2>
+          <div id="date-info">
+          </div>
+
+          <div id="weather-info">
+          </div>
+
+          <div id="weather-icon">
+          <div>
+        </div>
+      </div>
 
     <!-- display url and logo from pixabay -->
-  </main>
+    </main>
   <!-- <script src="./app.js"></script> -->
   </body>
 </html>
