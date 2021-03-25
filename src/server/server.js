@@ -33,6 +33,15 @@ app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
 })
 
+const travelData = [];
+console.log('traveldata', travelData);
+
+app.get('/trips', function (req, res) {
+    res.send(travelData);
+    console.log(travelData)
+
+})
+
 //geonames api call
 const fetchCoordinates = async (city, country) => {
     const url = "http://api.geonames.org/searchJSON?formatted=true";
@@ -54,31 +63,64 @@ const fetchCoordinates = async (city, country) => {
     }
 }
 
-const travelData = [];
-console.log('traveldata'+travelData);
-
 // https://api.weatherbit.io/v2.0/forecast/daily?lat=35.7796&lon=-78.6382&key=API_KEY
 // weatherbit api call
 const fetchWeather = async (lat, lng, date) => {
     const url = "https://api.weatherbit.io/v2.0/";
     const weatherbitApi = process.env.WEATHERBIT_KEY;
-    const weatherbitResponse = await fetch(`${url}forecast/daily?lat=${lat}&lon=${lng}&key=${weatherbitApi}`);
+
+    if (date <= 7){
+    const weatherbitResponse = await fetch(`${url}current?lat=${lat}&lon=${lng}&key=${weatherbitApi}`);
     console.log(weatherbitResponse);
-    try {
-        const weatherbitData = await weatherbitResponse.json();
-        // console.log('bit', weatherbitData);
+    console.log("less than 7")
 
-        const weatherData = {
-            min: weatherbitData.data[0].min_temp,
-            max: weatherbitData.data[0].max_temp,
-            description: weatherbitData.data[0].weather.description,
+        try {
+            const weatherbitData = await weatherbitResponse.json();
+            // console.log('bit', weatherbitData);
+
+            const weatherData = {
+                temp: weatherbitData.data[0].temp,
+                feels: weatherbitData.data[0].app_temp,
+                description: weatherbitData.data[0].weather.description,
+                icon: weatherbitData.data[0].weather.icon,
+                // diff: date
+            }
+            // console.log('final', weatherData);
+            return weatherData;
+
+        } catch (error) {
+            console.log('error from index.js: fetchWeather', error);
         }
-        // console.log('final', weatherData);
-        return weatherData;
+    } else if (date > 7 && date <= 16){
+        console.log("hello is 7 and 16")
+        const weatherbitResponse = await fetch(`${url}forecast/daily?lat=${lat}&lon=${lng}&key=${weatherbitApi}`);
+        console.log(weatherbitResponse);
+        const diff = (16 - date);
+        const arrayDiff = (diff - 1);
 
-    } catch (error) {
-        console.log('error from index.js: fetchWeather', error);
+            try {
+                const weatherbitData = await weatherbitResponse.json();
+                // console.log('bit', weatherbitData);
+
+                const weatherData = {
+                    min: weatherbitData.data[arrayDiff].min_temp,
+                    max: weatherbitData.data[arrayDiff].max_temp,
+                    description: weatherbitData.data[arrayDiff].weather.description,
+                    icon: weatherbitData.data[arrayDiff].weather.icon,
+                    diff: date
+                }
+                // console.log('final', weatherData);
+                return weatherData;
+
+            } catch (error) {
+                console.log('error from index.js: fetchWeather', error);
+            }
+    } else {
+        console.log("more than 16")
+
     }
+
+
 }
 
 // https://pixabay.com/api/?key=20750786-14149fcb1191f54f15308757e&q=yellow+flowers&image_type=photo
@@ -106,24 +148,32 @@ const fetchImage = async (city) => {
 }
 
 // post route
-app.post('/geonames', async (req, res) => {
+app.post('/trip', async (req, res) => {
     try {
     const city = req.body.newCity;
     const country = req.body.newCountry;
-    const date = req.body.travelDate;
+    const date = req.body.diff;
+    console.log("daysaway", date);
 
     let coordinates = await fetchCoordinates(city, country);
     let weather = await fetchWeather(coordinates.lat, coordinates.lng, date);
     let image = await fetchImage(city);
 
-    console.log('post', image);
-    // const trip = {
-    //     coordinates,
-    //     // weather
-    // }
-    // travelData.push(trip);
-    res.send(coordinates);
+    const trip = {
+        coordinates,
+        weather,
+        image
+    }
+    travelData.push(trip);
+    // travelData.push(date);
+
+    res.status(201).send();
+
+    console.log('post', trip);
+        console.log('post', date);
+
+
     } catch(error) {
-        console.log('error from post geonames in server.js', error)
+        console.log('error from post rout in server.js', error)
     }
 })
