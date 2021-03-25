@@ -1,19 +1,36 @@
 main {
-    background-color: #d9dbf0;
+    max-width: 1024px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 form {
-    background-color: #ffe2d1;
+    background-color: $color-primary;
     border: solid 4px #918beb;
     padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    // grid-template-rows: auto;
+    gap: 20px;
+
+    label {
+        display: block;
+    }
+
+    input {
+        width: 100%;
+        border-radius: 27px;
+    }
+}
+
+.full-width {
+grid-column: 1/3;
 }
 
 input, textarea {
-    background-color: #ffe2d1;
+    background-color: $color-white;
     border: solid 4px #918beb;
     height: 2.8rem;
-    min-width: 200px;
-    width: calc(100% - 2rem - 8px);
     padding: 0.5rem 1rem;
     margin: 0.5rem 0rem 0.5rem 0;
     font-size: 1rem;
@@ -34,13 +51,13 @@ button {
     color: #173b4a;
     border-bottom: solid 2px #918beb;
     cursor: pointer;
+    text-align: center;
 }
 
 .btn {
     text-decoration: none;
-    position: relative;
-    display: inline-flex;
-    align-items: center;
+    text-align: center;
+    border-radius: 27px;
     border: 0;
     margin-top: 0.6rem;
     padding: 0.7rem 1rem 0.6rem 1rem;
@@ -51,9 +68,8 @@ button {
 }
 
 .btn--primary {
-    background-color: #d9dbf0;
-    color: #918beb;
-    border: solid 4px #918beb;
+    background-color: $color-secondary;
+    color: $color-white;
 
     &:hover {
         background-color: #918beb;
@@ -70,4 +86,34 @@ button {
     display: inline-block;
     margin: 0.5rem 0;
     border: solid 4px #918beb;
+}
+
+.response-wrapper {
+    background-color: $color-primary;
+    border: solid 4px #918beb;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.one-third {
+grid-column: 1/2;
+}
+
+.two-thirds {
+grid-column: 2/4;
+}
+
+#location-img {
+
+
+    img {
+    // width: 100%;
+    border-radius: 50%;
+    // max-width: 200px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    }
 }

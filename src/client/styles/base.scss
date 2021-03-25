@@ -22,7 +22,7 @@ body {
     "header header header header header header header header header header header header"
     "main main main main main main main main main main main main"
     "ft ft ft ft ft ft ft ft ft ft ft ft";
-    
+   
 }
 
 header {
@@ -31,8 +31,6 @@ header {
 
 main {
     grid-area: main;
-    border-bottom: solid 4px #918beb;
-    border-top: solid 4px #918beb;
 }
 
 footer {
