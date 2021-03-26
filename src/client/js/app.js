@@ -63,8 +63,8 @@ const fetchAllTrips = async(diff) => {
 const fetchSingleTrip = async(newCity = '', newCountry = '', diff = '') => {
     const result = await fetch('http://localhost:5000/trip', {
         method: 'POST',
-        // mode: 'cors',
-        // credentials: 'same-origin',
+        mode: 'cors',
+        credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json',
         },
