@@ -13,7 +13,6 @@ function getGeonames(event) {
     const diff = calcTravelTime(travelDate);
     console.log(diff);
     fetchSingleTrip(newCity, newCountry, diff);    
-    // calcTravelTime(travelDate);
     diff;
 };
 
@@ -27,8 +26,8 @@ const fetchAllTrips = async(diff) => {
             allResults.forEach(trip => {
             const {coordinates, weather, image} = trip
             console.log("info so new", coordinates, weather, image);
-            document.getElementById('weather-info').innerHTML = `The current temperature is ${weather.temp}°C and the felt temperature is ${weather.feels}°C, ${weather.description}`;
-            document.getElementById('weather-icon').innerHTML = `<img src="../img/${weather.icon}.png">`;
+            document.getElementById('weather-info').innerHTML = `<p>The current temperature is ${weather.temp}°C and the felt temperature is ${weather.feels}°C, ${weather.description}</p>`;
+            document.getElementById('weather-icon').innerHTML = `<img src="../dist/img/${weather.icon}.png">`;
 
             document.getElementById('location-img').innerHTML = `<img src="${image.image_url}">`;
             // document.getElementById('date-info').innerHTML = `Weather info: ${weather.min} ${weather.max} ${weather.description}`;
@@ -48,8 +47,8 @@ const fetchAllTrips = async(diff) => {
             allResults.forEach(trip => {
             const {coordinates, weather, image} = trip
 
-            document.getElementById('weather-info').innerHTML = `Minimum temperature is ${weather.min}°C and maximum temperature is ${weather.max}°C, ${weather.description}`;
-            document.getElementById('weather-icon').innerHTML = `<img src="../img/${weather.icon}.png">`;
+            document.getElementById('weather-info').innerHTML = `<p>Minimum temperature is ${weather.min}°C and maximum temperature is ${weather.max}°C, ${weather.description}</p>`;
+            document.getElementById('weather-icon').innerHTML = `<img src="../dist/img/${weather.icon}.png">`;
 
             document.getElementById('location-img').innerHTML = `<img src="${image.image_url}">`;
             // document.getElementById('date-info').innerHTML = `Weather info: ${weather.min} ${weather.max} ${weather.description}`;
@@ -63,8 +62,8 @@ const fetchAllTrips = async(diff) => {
 const fetchSingleTrip = async(newCity = '', newCountry = '', diff = '') => {
     const result = await fetch('http://localhost:5000/trip', {
         method: 'POST',
-        mode: 'cors',
-        credentials: 'same-origin',
+        // mode: 'cors',
+        // credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json',
         },
