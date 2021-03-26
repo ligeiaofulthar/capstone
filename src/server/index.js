@@ -96,7 +96,7 @@ const fetchWeather = async (lat, lng, date) => {
                 console.log('error from index.js: fetchWeather', error);
             }
     } else {
-        console.log("more than 16")
+        alert("Please choose a date within the next 16 days")
 
     }
 }
@@ -140,7 +140,6 @@ app.post('/trip', async (req, res) => {
         }
 
         travelData.push(trip);
-
         res.status(201).send();
 
     } catch(error) {
