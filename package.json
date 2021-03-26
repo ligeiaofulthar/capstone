@@ -27,23 +27,24 @@
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "sass-loader": "^10.1.1",
     "style-loader": "^2.0.0",
+    "supertest": "^6.1.3",
     "terser-webpack-plugin": "^4.2.3",
     "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
-    "test": "test",
+    "test": "jest",
     "start": "node src/server/server.js",
     "prod": "webpack --config webpack.prod.js",
     "dev": "webpack-dev-server  --config webpack.dev.js --open"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ligeiaofulthar/capstone.git"
+    "url": "git+https://github.com/yulia_graphics/capstone.git"
   },
   "author": "Yulia Halper",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ligeiaofulthar/capstone/issues"
+    "url": "https://github.com/yulia_graphics/capstone/issues"
   },
-  "homepage": "https://github.com/ligeiaofulthar/capstone#readme"
+  "homepage": "https://github.com/yulia_graphics/capstone#readme"
 }
