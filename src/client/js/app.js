@@ -26,9 +26,9 @@ const fetchAllTrips = async(diff) => {
 
             allResults.forEach(trip => {
             const {coordinates, weather, image} = trip
-console.log("info so new", coordinates, weather, image);
+            console.log("info so new", coordinates, weather, image);
             document.getElementById('weather-info').innerHTML = `The current temperature is ${weather.temp}°C and the felt temperature is ${weather.feels}°C, ${weather.description}`;
-            document.getElementById('weather-icon').innerHTML = `<img src="../src/client/media/icons/${weather.icon}.png">`;
+            document.getElementById('weather-icon').innerHTML = `<img src="../img/${weather.icon}.png">`;
 
             document.getElementById('location-img').innerHTML = `<img src="${image.image_url}">`;
             // document.getElementById('date-info').innerHTML = `Weather info: ${weather.min} ${weather.max} ${weather.description}`;
@@ -49,7 +49,7 @@ console.log("info so new", coordinates, weather, image);
             const {coordinates, weather, image} = trip
 
             document.getElementById('weather-info').innerHTML = `Minimum temperature is ${weather.min}°C and maximum temperature is ${weather.max}°C, ${weather.description}`;
-            document.getElementById('weather-icon').innerHTML = `<img src="../src/client/media/icons/${weather.icon}.png">`;
+            document.getElementById('weather-icon').innerHTML = `<img src="../img/${weather.icon}.png">`;
 
             document.getElementById('location-img').innerHTML = `<img src="${image.image_url}">`;
             // document.getElementById('date-info').innerHTML = `Weather info: ${weather.min} ${weather.max} ${weather.description}`;
@@ -87,6 +87,7 @@ const fetchSingleTrip = async(newCity = '', newCountry = '', diff = '') => {
     // }
 }
 
+
 function calcTravelTime(travelDate) {
     let today = new Date();
 
@@ -108,6 +109,6 @@ function calcTravelTime(travelDate) {
     dateInfo.appendChild(p);
 
     return daysAway;
-}
 
+}
 export { getGeonames }
