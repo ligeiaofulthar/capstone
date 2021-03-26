@@ -57,7 +57,6 @@ const fetchSingleTrip = async(newCity = '', newCountry = '', diff = '') => {
         },
         body: JSON.stringify({ newCity, newCountry, diff }),
         })
-        console.log(result)
 
         if (!result.ok) {
             error 
