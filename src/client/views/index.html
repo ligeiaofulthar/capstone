@@ -8,52 +8,68 @@
     <!-- <link href="./css/styles.css" rel="stylesheet"> -->
   </head>
   <body>
+    <header>
+          <h1>Travelplanner</h1>
+    </header>
     <main>
-      <h1>Travelplanner</h1>
-      <form class="">
-        <label class="full-width" for="city">To</label>
+      <form class="grid-container">
+        <div class="label">
+          <label class="" for="city">to</label>
+        </div>
 
-        <div>
+        <div class="label-2">
+          <label class="one-thirds--label2" for="travel-date">departure</label>
+        </div>
+
+        <div class="city">
           <input class="" placeholder="City" type="text" name="city" id="city">
-          <!-- <p class="tipp">e.g. Vienna, Berlin, Washington</p> -->
         </div>
 
-        <div>
-          <!-- <label class="" for="country">he</label> -->
+        <div class="country">
           <input class="" placeholder="Country" type="text" name="country" id="country">
-          <!-- <p class="tipp">e.g. for Austria: AT, America: US</p> -->
         </div>
 
-        <div class="full-width">
-          <label class="" for="travel-date">departure</label>
+        <div class="date">
           <input class="" placeholder="dd/mm/yyyy" type="date" name="travel-date" id="travel-date">
         </div>
 
-        <div class=""></div>
-        <button class="btn btn--primary" id="submit-form">Send</button>
+        <div class="send">
+          <button class="btn btn--primary" id="submit-form">Send</button>
+        </div>
       </form>
 
       <div class="response-wrapper md-comment">
-        <div class="one-third">
-          <div id="location-img">
-          </div>
+        <div class="one-half">
+          <div id="location-img"></div>
         </div>
 
         <div class="two-thirds">
-          <h2>Your trip:</h2>
-          <div id="date-info">
-          </div>
+          <h2>Your trip</h2>
+          <div id="date-info"></div>
 
-          <div id="weather-info">
+          <div class="weather-wrapper">
+            <div id="weather-info" class="temp-info"></div>
+            <div id="weather-icon" class="icon-info"><div>
           </div>
-
-          <div id="weather-icon">
-          <div>
         </div>
       </div>
+    </div>
+  </div>
+    <footer>
+      <ul>
+          <li>
+          <p>Made by Yulia | Project by udacity</p>
+        </li>
+        <li>
+          <a href="https://pixabay.com/">
+            <img src="https://pixabay.com/static/img/public/medium_rectangle_a.png" alt="Pixabay">
+          </a>
+        </li>
 
+
+      </ul>
+    </footer>
     <!-- display url and logo from pixabay -->
     </main>
-  <!-- <script src="./app.js"></script> -->
   </body>
 </html>
