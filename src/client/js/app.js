@@ -1,40 +1,32 @@
-// import { checkUrl } from './urlChecker';
-
 function getGeonames(event) {
     event.preventDefault();
     let newCity = document.getElementById('city').value;
-    console.log(newCity);
     let newCountry = document.getElementById('country').value;
-    console.log(newCountry);
     let travelDate = new Date(document.getElementById("travel-date").value);
-    console.log("travelDate", travelDate);
-    console.log("::: Form Submitted :::")
     
+    // get the days until departure
     const diff = calcTravelTime(travelDate);
-    console.log(diff);
     fetchSingleTrip(newCity, newCountry, diff);    
     diff;
 };
 
+// with the value how many days the trip is away, determine wheter to request the date from the forecast or the current api
 const fetchAllTrips = async(diff) => {
     if (diff <= 7) {
         try {
             const result = await fetch('http://localhost:5000/trips')
             const allResults = await result.json()
-            console.log('allresults', allResults)
 
             allResults.forEach(trip => {
             const {coordinates, weather, image} = trip
-            console.log("info so new", coordinates, weather, image);
+
             document.getElementById('weather-info').innerHTML = `<p>The current temperature is ${weather.temp}°C and the felt temperature is ${weather.feels}°C, ${weather.description}</p>`;
             document.getElementById('weather-icon').innerHTML = `<img src="../dist/img/${weather.icon}.png">`;
-
             document.getElementById('location-img').innerHTML = `<img src="${image.image_url}">`;
-            // document.getElementById('date-info').innerHTML = `Weather info: ${weather.min} ${weather.max} ${weather.description}`;
         })
-    } catch(error) {
-        console.log('error from fetchAllTrips in app.js', error);
-    }
+        } catch(error) {
+            console.log('error from fetchAllTrips in app.js', error);
+        }
     }
 
     else if (diff > 7 && diff <= 16){
@@ -42,16 +34,13 @@ const fetchAllTrips = async(diff) => {
         try {
             const result = await fetch('http://localhost:5000/trips')
             const allResults = await result.json()
-            console.log('allresults', allResults)
 
             allResults.forEach(trip => {
             const {coordinates, weather, image} = trip
 
             document.getElementById('weather-info').innerHTML = `<p>Minimum temperature is ${weather.min}°C and maximum temperature is ${weather.max}°C, ${weather.description}</p>`;
             document.getElementById('weather-icon').innerHTML = `<img src="../dist/img/${weather.icon}.png">`;
-
             document.getElementById('location-img').innerHTML = `<img src="${image.image_url}">`;
-            // document.getElementById('date-info').innerHTML = `Weather info: ${weather.min} ${weather.max} ${weather.description}`;
         })
         } catch(error) {
             console.log('error from fetchAllTrips in app.js', error);
@@ -59,11 +48,10 @@ const fetchAllTrips = async(diff) => {
     }
 }
 
+// get the info of the trip to the server
 const fetchSingleTrip = async(newCity = '', newCountry = '', diff = '') => {
     const result = await fetch('http://localhost:5000/trip', {
         method: 'POST',
-        // mode: 'cors',
-        // credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -72,31 +60,17 @@ const fetchSingleTrip = async(newCity = '', newCountry = '', diff = '') => {
         console.log(result)
 
         if (!result.ok) {
-
+            error 
         } else {
             fetchAllTrips(diff)
         }
-    // try {
-    //     const apiAnswer = await result.json()
-    //     console.log('JSON:', apiAnswer)
-    //     return apiAnswer;
-
-    // } catch(error) {
-    //     console.log('error from fetchSingleTrip in app.js', error);
-    // }
 }
 
-
+// calculate how many days till departure
 function calcTravelTime(travelDate) {
     let today = new Date();
-
-    // let todayTimeZone = new Intl.DateTimeFormat().format(today);
-    // console.log("timezone", todayTimeZone);
-
-    // let travelTimeZone = new Intl.DateTimeFormat().format(travelDate);
-    // console.log("traveltimezone", travelTimeZone);
-    
-    const msPerDay = 24 * 60 * 60 * 1000; // Number of milliseconds per day
+    // Number of milliseconds per day
+    const msPerDay = 24 * 60 * 60 * 1000; 
 
     let daysAway = (travelDate.getTime() - today.getTime())/msPerDay;
     daysAway = Math.floor(daysAway);
@@ -108,6 +82,6 @@ function calcTravelTime(travelDate) {
     dateInfo.appendChild(p);
 
     return daysAway;
-
 }
+
 export { getGeonames }

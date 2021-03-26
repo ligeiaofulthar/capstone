@@ -27,12 +27,9 @@ app.get('/', function (req, res) {
 })
 
 const travelData = [];
-console.log('traveldata', travelData);
 
 app.get('/trips', function (req, res) {
     res.send(travelData);
-    console.log(travelData)
-
 })
 
 //geonames api call
@@ -41,7 +38,6 @@ const fetchCoordinates = async (city, country) => {
     const geonamesApi = process.env.GEONAMES_USERNAME;
     const encodeCity = encodeURIComponent(city)
     const geonamesResponse = await fetch(`${url}&name=${encodeCity}&countryCode=${country}&username=${geonamesApi}&charset=ISO8859-1`);
-    console.log(geonamesResponse);
     try {
         const geonamesData = await geonamesResponse.json();
 
@@ -49,7 +45,6 @@ const fetchCoordinates = async (city, country) => {
             lat: geonamesData.geonames[0].lat,
             lng: geonamesData.geonames[0].lng,
         }
-        console.log(geonamesData.geonames[0]);
         return projectData;
     } catch (error) {
         console.log('error from index.js: fetchCoordinates', error);
@@ -62,38 +57,31 @@ const fetchWeather = async (lat, lng, date) => {
     const url = "https://api.weatherbit.io/v2.0/";
     const weatherbitApi = process.env.WEATHERBIT_KEY;
 
+    // with the value how many days the trip is away, determine wheter to fetch from the forecast or the current api
     if (date <= 7){
     const weatherbitResponse = await fetch(`${url}current?lat=${lat}&lon=${lng}&key=${weatherbitApi}`);
-    console.log(weatherbitResponse);
-    console.log("less than 7")
 
         try {
             const weatherbitData = await weatherbitResponse.json();
-            // console.log('bit', weatherbitData);
 
             const weatherData = {
                 temp: weatherbitData.data[0].temp,
                 feels: weatherbitData.data[0].app_temp,
                 description: weatherbitData.data[0].weather.description,
                 icon: weatherbitData.data[0].weather.icon,
-                // diff: date
             }
-            // console.log('final', weatherData);
             return weatherData;
 
         } catch (error) {
             console.log('error from index.js: fetchWeather', error);
         }
     } else if (date > 7 && date <= 16){
-        console.log("hello is 7 and 16")
         const weatherbitResponse = await fetch(`${url}forecast/daily?lat=${lat}&lon=${lng}&key=${weatherbitApi}`);
-        console.log(weatherbitResponse);
         const diff = (16 - date);
         const arrayDiff = (diff - 1);
 
             try {
                 const weatherbitData = await weatherbitResponse.json();
-                // console.log('bit', weatherbitData);
 
                 const weatherData = {
                     min: weatherbitData.data[arrayDiff].min_temp,
@@ -102,7 +90,6 @@ const fetchWeather = async (lat, lng, date) => {
                     icon: weatherbitData.data[arrayDiff].weather.icon,
                     diff: date
                 }
-                // console.log('final', weatherData);
                 return weatherData;
 
             } catch (error) {
@@ -112,8 +99,6 @@ const fetchWeather = async (lat, lng, date) => {
         console.log("more than 16")
 
     }
-
-
 }
 
 // https://pixabay.com/api/?key=20750786-14149fcb1191f54f15308757e&q=yellow+flowers&image_type=photo
@@ -121,18 +106,15 @@ const fetchWeather = async (lat, lng, date) => {
 const fetchImage = async (city) => {
     const url = "https://pixabay.com/api/";
     city_encoded= encodeURIComponent(city);
-    console.log(city_encoded);
     const pixabayApi = process.env.PIXABAY_KEY;
     const pixabayResponse = await fetch(`${url}?key=${pixabayApi}&q=${city_encoded}&image_type=photo`);
-    console.log(pixabayResponse);
+
     try {
         const pixabayData = await pixabayResponse.json();
-        // console.log('pixa', pixabayData);
 
         const pixaData = {
             image_url: pixabayData.hits[0].largeImageURL
         }
-        // console.log('final', pixaData);
         return pixaData;
 
     } catch (error) {
@@ -143,28 +125,23 @@ const fetchImage = async (city) => {
 // post route
 app.post('/trip', async (req, res) => {
     try {
-    const city = req.body.newCity;
-    const country = req.body.newCountry;
-    const date = req.body.diff;
-    console.log("daysaway", date);
+        const city = req.body.newCity;
+        const country = req.body.newCountry;
+        const date = req.body.diff;
 
-    let coordinates = await fetchCoordinates(city, country);
-    let weather = await fetchWeather(coordinates.lat, coordinates.lng, date);
-    let image = await fetchImage(city);
+        let coordinates = await fetchCoordinates(city, country);
+        let weather = await fetchWeather(coordinates.lat, coordinates.lng, date);
+        let image = await fetchImage(city);
 
-    const trip = {
-        coordinates,
-        weather,
-        image
-    }
-    travelData.push(trip);
-    // travelData.push(date);
+        const trip = {
+            coordinates,
+            weather,
+            image
+        }
 
-    res.status(201).send();
+        travelData.push(trip);
 
-    console.log('post', trip);
-        console.log('post', date);
-
+        res.status(201).send();
 
     } catch(error) {
         console.log('error from post rout in server.js', error)
