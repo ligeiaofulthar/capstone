@@ -1,0 +1,20 @@
+// Small devices
+@mixin xs {
+   @media (min-width: #{$xs}) {
+       @content;
+   }
+}
+
+// Medium devices
+@mixin sm {
+   @media (min-width: #{$sm}) {
+       @content;
+   }
+}
+
+// Large devices
+@mixin md {
+   @media (min-width: #{$md}) {
+       @content;
+   }
+}
