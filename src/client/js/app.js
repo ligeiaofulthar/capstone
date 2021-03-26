@@ -21,7 +21,7 @@ const fetchAllTrips = async(diff) => {
             const {coordinates, weather, image} = trip
 
             document.getElementById('weather-info').innerHTML = `<p>The current temperature is ${weather.temp}°C and the felt temperature is ${weather.feels}°C, ${weather.description}</p>`;
-            document.getElementById('weather-icon').innerHTML = `<img src="../dist/img/${weather.icon}.png">`;
+            document.getElementById('weather-icon').innerHTML = `<img src="../img/${weather.icon}.png">`;
             document.getElementById('location-img').innerHTML = `<img src="${image.image_url}">`;
         })
         } catch(error) {
@@ -39,7 +39,7 @@ const fetchAllTrips = async(diff) => {
             const {coordinates, weather, image} = trip
 
             document.getElementById('weather-info').innerHTML = `<p>Minimum temperature is ${weather.min}°C and maximum temperature is ${weather.max}°C, ${weather.description}</p>`;
-            document.getElementById('weather-icon').innerHTML = `<img src="../dist/img/${weather.icon}.png">`;
+            document.getElementById('weather-icon').innerHTML = `<img src="../img/${weather.icon}.png">`;
             document.getElementById('location-img').innerHTML = `<img src="${image.image_url}">`;
         })
         } catch(error) {
