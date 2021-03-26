@@ -72,8 +72,8 @@ button {
     padding: 0;
     background-color: transparent;
     font-size: 1rem;
-    color: #173b4a;
-    border-bottom: solid 2px #918beb;
+    color: $color-black;
+    border-bottom: solid 2px $color-secondary-light;
     cursor: pointer;
     text-align: center;
 }
@@ -97,8 +97,8 @@ button {
     color: $color-white;
 
     &:hover {
-        background-color: #918beb;
-        color: #173b4a;
+        background-color: $color-secondary-light;
+        color: $color-black;
     }
 }
 

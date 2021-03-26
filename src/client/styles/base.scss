@@ -2,12 +2,10 @@ body {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 100px auto 60px;
-    // gap: 0px 30px;
     grid-template-areas:
     "header header header header header header header header header header header header"
     "main main main main main main main main main main main main"
     "ft ft ft ft ft ft ft ft ft ft ft ft";
-   
 }
 
 header {
@@ -24,7 +22,7 @@ footer {
 
 .footer--link {
     &:hover {
-        color: #918beb ;
+        color: $color-secondary-light ;
     }
 }
 
@@ -35,22 +33,23 @@ a {
 }
 
 a:link {
-	color: #000;
-	border-bottom: solid 2px #b36f47;
+	color: $color-black;
+	border-bottom: solid 2px $color-secondary;
 }
 
 a:hover {
-
+	color: $color-black;
+	border-bottom: solid 2px $color-black;
 }
 
 a:visited {
-	color: #000;
-	border-bottom: solid 2px #918beb;
+	color: $color-black;
+	border-bottom: solid 2px $color-secondary-light;
 }
 
 a:active {
-	color: #3b7764;
-	border-bottom: solid 2px #000;
+	color: $color-secondary;
+	border-bottom: solid 2px $color-black;
 }
 
 p {
