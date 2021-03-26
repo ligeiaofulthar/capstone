@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(express.static('dist'));
 
 // Spin up the server
-const port = process.env.PORT | 5000;
+const port = process.env.PORT || 5000;
 app.listen(port, function() {
     console.log(`running on localhost: ${port}`);
 })
