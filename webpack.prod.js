@@ -1,9 +1,11 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebPackPlugin = require("html-webpack-plugin")
+const TerserPlugin = require("terser-webpack-plugin")
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const TerserPlugin = require("terser-webpack-plugin")
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 // const WorkboxPlugin = require('workbox-webpack-plugin')
 
 module.exports = {
@@ -36,11 +38,22 @@ module.exports = {
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
             },
             {
-                test: /\.(png|jpe?g|gif|svg)$/i,
-                loader: 'file-loader',
-                options: {
-                    name: '[path][name].[ext]',
-                  },
+                            
+                test: /\.jpe?g$|\.gif$|\.png$/i,
+                loader: "file-loader?name=/img/[name].[ext]"
+            
+                // test: /\.(png|jpe?g|gif)$/i,
+                // use: [
+                //   {
+                //     loader: 'file-loader',
+                //   },
+                // ],
+
+                // test: /\.(png|jpe?g|gif|svg)$/i,
+                // loader: 'file-loader',
+                // options: {
+                //     name: '[path][name].[ext]',
+                //   },
             }
         ]
     },
@@ -66,6 +79,14 @@ module.exports = {
             preset: ['default', { discardComments: { removeAll: true } }],
             },
             canPrint: true
-        })
+        }),
+        new CopyWebpackPlugin({
+             patterns: [
+                {
+                    from: path.resolve(__dirname, 'src/client/media/icons'),
+                    to:'img'
+                    }, 
+            ],
+        }), 
     ]
 }
