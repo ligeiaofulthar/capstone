@@ -18,7 +18,7 @@ To look at my project, run the following command in the root of the project fold
 Then go to http://localhost:5000 for production code and http://localhost:8080 for dev
 
 ## Api Keys
-The api keys are hidden in an .env, you can see in the dotenv.example what their names are and insert your own.
+The api keys are hidden in an .env-file. Please make your own. You can see in the dotenv.example what the names of the variables of the api keys are and insert your own keys.
 
 ## Project Description
 
