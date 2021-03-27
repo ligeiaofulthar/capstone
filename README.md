@@ -4,6 +4,7 @@ travel app for udacity
 ## Table of Contents
 
 * [Instructions](#instructions)
+* [Api Keys](#keys)
 * [Project Description](#description)
 * [Extend Project](#project)
 * [Technologies](#technologies)
@@ -16,9 +17,12 @@ To look at my project, run the following command in the root of the project fold
 
 Then go to http://localhost:5000 for production code and http://localhost:8080 for dev
 
+## Api Keys
+The api keys are hidden in an .env, you can see in the dotenv.example what their names are and insert your own.
+
 ## Project Description
 
-This travel app takes the user input of city and country and inserts it into the geonames api. This api returns longitude and latitude, which are then passed to the next api called weatherbit api. The weather api returns temperature, an icon code, and a description. The pixabay api returns an image of the location. 
+This travel app takes the user input of city and country and inserts it into the geonames api. This api returns longitude and latitude, which are then passed to the next api called weatherbit api. The weather api returns temperature, an icon code, and a description. The pixabay api returns an image of the location.
 
 ## Extend Project
 

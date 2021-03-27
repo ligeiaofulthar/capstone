@@ -1,0 +1,10 @@
+# dotenv
+
+# Insert Geonames username
+GEONAMES_USERNAME=""
+
+# Insert Weatherbit api key
+WEATHERBIT_KEY=""
+
+# Insert Pixabay api key
+PIXABAY_KEY=""
